@@ -1,0 +1,160 @@
+/* planejamento.css */
+
+/* 🌞 Tema claro */
+body {
+  background-color: #f8f8f8;
+  color: #222;
+}
+
+/* 🌓 Modo escuro */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #121212;
+    color: #e0e0e0;
+  }
+
+  .alert {
+    background-color: #333;
+    color: #ffd;
+    border-left: 4px solid #ff4444;
+  }
+
+  header,
+  footer {
+    background-color: #1a1a1a;
+  }
+
+  button {
+    background-color: #333;
+    color: #fff;
+  }
+}
+
+/* Container principal */
+main {
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+  font-family: "Inter", sans-serif;
+}
+
+/* Título principal */
+h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--text);
+}
+
+/* Cartões de conteúdo */
+.card {
+  background-color: var(--secondary);
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  transition: background-color 0.3s ease;
+}
+
+body.dark .card {
+  background-color: #2b2b2b;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
+}
+
+/* Títulos dentro dos cartões */
+.card h3 {
+  margin-top: 0;
+  color: var(--text);
+}
+
+/* Parágrafos dentro dos cartões */
+.card p {
+  font-size: 1rem;
+  color: var(--text);
+}
+
+/* Lista simples para culturas */
+#lista-culturas {
+  list-style: disc inside;
+  padding-left: 0;
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* Botão de atualizar */
+.btn-refresh {
+  display: block;
+  margin: 1rem auto 3rem auto;
+  padding: 0.8rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.15s ease;
+}
+
+.btn-refresh:hover {
+  background-color: #146b14;
+  transform: scale(1.05);
+}
+
+.btn-refresh:active {
+  transform: scale(0.97);
+}
+
+/* Alertas de aviso */
+.alert {
+  background-color: #f9dcdc;
+  border-left: 6px solid #e74c3c;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  color: #a94442;
+  font-weight: 600;
+}
+
+body.dark .alert {
+  background-color: #6f2a2a;
+  border-left-color: #e74c3c;
+  color: #f7c6c5;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  .card {
+    padding: 1rem 1.2rem;
+  }
+
+  .btn-refresh {
+    width: 100%;
+    padding: 1rem;
+  }
+}
+body.dark {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+body.dark header,
+body.dark footer {
+  background-color: #1a1a1a;
+}
+
+body.dark .alert {
+  background-color: #333;
+  color: #ffd;
+  border-left: 4px solid #ff4444;
+}
+
+body.dark button {
+  background-color: #333;
+  color: #fff;
+}
+@media (prefers-color-scheme: dark) {
+  body:not(.dark-mode-disabled) {
+    background-color: #121212;
+    color: #e0e0e0;
+  }
+}

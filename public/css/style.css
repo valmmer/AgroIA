@@ -1,0 +1,216 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  line-height: 1.6;
+}
+
+:root {
+  --bg: #f4f4f4;
+  --text: #333;
+  --primary: #1f7a1f;
+  --secondary: #fff;
+  --accent: #4caf50;
+}
+
+body.dark {
+  --bg: #1a1a1a;
+  --text: #e4e4e4;
+  --secondary: #333;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Header */
+.header {
+  background: var(--secondary);
+  padding: 1rem 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.logo {
+  font-size: 1.5rem;
+  color: var(--primary);
+  font-weight: bold;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.menu a {
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.menu a:hover {
+  color: var(--primary);
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* Hero */
+.hero {
+  text-align: center;
+  padding: 4rem 1rem;
+  background: linear-gradient(to right, #d0e6d0, #e9f5e9);
+  color: #1f1f1f;
+}
+
+.hero h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background: #146b14;
+}
+
+/* Sobre */
+.sobre {
+  padding: 3rem 1rem;
+  background-color: var(--bg);
+}
+
+.sobre h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.sobre p {
+  font-size: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Footer */
+.footer {
+  background: var(--secondary);
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .menu {
+    flex-direction: column;
+    display: none;
+  }
+
+  .menu.active {
+    display: flex;
+  }
+
+  .theme-toggle {
+    margin-left: auto;
+  }
+}
+
+/* Adições para Dark Mode refinado */
+body.dark .hero {
+  background: linear-gradient(to right, #2e4e2e, #3a5c3a);
+  color: #e4e4e4;
+}
+
+body.dark .btn {
+  background: #4caf50;
+  color: #fff;
+}
+
+body.dark .btn:hover {
+  background: #388e3c;
+}
+
+body.dark .sobre {
+  background-color: #222;
+  color: #ccc;
+}
+
+body.dark .footer {
+  background: #111;
+  color: #888;
+}
+
+body.dark .menu a {
+  color: #e4e4e4;
+}
+
+body.dark .menu a:hover {
+  color: #4caf50;
+}
+
+body.dark .logo {
+  color: #4caf50;
+}
+/* Toast notification */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background-color: var(--primary);
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  z-index: 1000;
+  font-weight: 600;
+  user-select: none;
+}
+
+.toast.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}

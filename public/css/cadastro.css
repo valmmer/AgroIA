@@ -1,0 +1,157 @@
+/* cadastro.css */
+
+/* 🌞 Tema claro */
+body {
+  background-color: #f8f8f8;
+  color: #222;
+}
+
+/* 🌓 Modo escuro */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #121212;
+    color: #e0e0e0;
+  }
+
+  .alert {
+    background-color: #333;
+    color: #ffd;
+    border-left: 4px solid #ff4444;
+  }
+
+  header,
+  footer {
+    background-color: #1a1a1a;
+  }
+
+  button {
+    background-color: #333;
+    color: #fff;
+  }
+}
+
+/* Formulário estilizado */
+form#form-produtor {
+  max-width: 600px;
+  margin: 2rem auto 4rem auto;
+  background-color: var(--secondary);
+  padding: 2.5rem 3rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+body.dark form#form-produtor {
+  background-color: #2a2a2a;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+}
+
+form#form-produtor label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+  transition: color 0.3s ease;
+}
+
+form#form-produtor input[type="text"],
+form#form-produtor select {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 1.8rem;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  background-color: var(--secondary);
+  color: var(--text);
+}
+
+body.dark form#form-produtor input[type="text"],
+body.dark form#form-produtor select {
+  background-color: #444;
+  border-color: #666;
+  color: #e4e4e4;
+}
+
+form#form-produtor input[type="text"]:focus,
+form#form-produtor select:focus {
+  border-color: var(--accent);
+  outline: none;
+  box-shadow: 0 0 6px var(--accent);
+}
+
+button.btn {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.1rem;
+  background-color: var(--primary);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.15s ease;
+}
+
+button.btn:hover {
+  background-color: #146b14;
+  transform: scale(1.03);
+}
+
+button.btn:active {
+  transform: scale(0.97);
+}
+
+/* Toast notification */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background-color: var(--primary);
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  z-index: 1000;
+  font-weight: 600;
+  user-select: none;
+}
+
+.toast.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+body.dark {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+body.dark header,
+body.dark footer {
+  background-color: #1a1a1a;
+}
+
+body.dark .alert {
+  background-color: #333;
+  color: #ffd;
+  border-left: 4px solid #ff4444;
+}
+
+body.dark button {
+  background-color: #333;
+  color: #fff;
+}
+@media (prefers-color-scheme: dark) {
+  body:not(.dark-mode-disabled) {
+    background-color: #121212;
+    color: #e0e0e0;
+  }
+}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Planejamento de Plantio - AgroIA</title>
+
+    <!-- 🎨 Fontes e estilos externos -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- 🎨 Estilos internos do projeto -->
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/cadastro.css" />
+    <link rel="stylesheet" href="/css/planejamento.css" />
+  </head>
+  <body>
+    <!-- 🌾 Cabeçalho de navegação -->
+    <header class="header">
+      <div class="container nav">
+        <h1 class="logo">🌾 AgroIA</h1>
+        <nav>
+          <button class="theme-toggle" id="theme-toggle" title="Alternar tema">
+            🌓
+          </button>
+          <ul class="menu" id="menu">
+            <li><a href="/">Início</a></li>
+            <li><a href="/cadastro">Cadastro</a></li>
+            <li>
+              <a href="/planejamento" aria-current="page">Planejamento</a>
+            </li>
+            <li><a href="/chat">Assistente IA</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- 🌿 Conteúdo principal -->
+    <main class="container">
+      <h2>Planejamento de Plantio</h2>
+
+      <section id="produtor-info" class="card">
+        <h3>Informações do Produtor</h3>
+        <p><strong>Nome:</strong> <span id="nome-produtor">—</span></p>
+        <p>
+          <strong>Localização:</strong> <span id="localizacao-produtor">—</span>
+        </p>
+        <p><strong>Tipo de Solo:</strong> <span id="solo-produtor">—</span></p>
+        <p>
+          <strong>Culturas de Interesse:</strong>
+          <span id="culturas-produtor">—</span>
+        </p>
+        <p>
+          <strong>Período de Plantio:</strong>
+          <span id="periodo-produtor">—</span>
+        </p>
+      </section>
+
+      <section id="sugestoes-culturas" class="card">
+        <h3>Sugestões de Culturas para seu Solo</h3>
+        <ul id="lista-culturas">
+          <li>Carregando...</li>
+        </ul>
+      </section>
+
+      <section id="previsao-tempo" class="card">
+        <h3>Previsão do Tempo (Simulada)</h3>
+        <p><strong>Temperatura:</strong> <span id="temp">—</span> °C</p>
+        <p><strong>Condição:</strong> <span id="condicao">—</span></p>
+        <p><strong>Chance de Chuva:</strong> <span id="chuva">—</span>%</p>
+      </section>
+
+      <section id="alertas" class="card" style="display: none">
+        <h3>Alertas</h3>
+        <div id="alertas-lista"></div>
+      </section>
+
+      <button class="btn-refresh" id="btn-refresh">Atualizar Previsão</button>
+    </main>
+
+    <!-- 👣 Rodapé da página -->
+    <footer class="footer">
+      <p>
+        &copy; 2025 AgroIA. Desenvolvido com foco em impacto social e
+        sustentabilidade.
+      </p>
+    </footer>
+
+    <!-- 🧠 Scripts do frontend -->
+    <script src="/js/main.js"></script>
+    <script src="/js/planejamento.js"></script>
+  </body>
+</html>

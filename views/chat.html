@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>🌾 AgroIA - Assistente Virtual</title>
+
+    <!-- Fontes e estilos -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Estilos do projeto -->
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/chat.css" />
+  </head>
+  <body>
+    <!-- Cabeçalho com menu de navegação -->
+    <header class="header">
+      <div class="container nav">
+        <div class="logo">🌾 AgroIA</div>
+        <ul class="menu">
+          <li><a href="/">Início</a></li>
+          <li><a href="/cadastro">Cadastro</a></li>
+          <li><a href="/planejamento">Planejamento</a></li>
+          <li><a href="/chat" aria-current="page">Assistente IA</a></li>
+        </ul>
+        <button class="theme-toggle" title="Alternar tema">🌓</button>
+      </div>
+    </header>
+
+    <!-- Corpo principal do chat -->
+    <main class="container">
+      <h2>🌿 Assistente Virtual AgroIA</h2>
+      <div id="chat-container">
+        <div id="chat-messages"></div>
+        <form id="chat-form">
+          <input
+            type="text"
+            id="user-input"
+            placeholder="Digite sua mensagem..."
+            required
+          />
+          <button type="submit" class="btn">Enviar</button>
+        </form>
+      </div>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+      <p>
+        &copy; 2025 AgroIA. Desenvolvido com foco em impacto social e
+        sustentabilidade.
+      </p>
+    </footer>
+
+    <!-- Script da lógica do chat -->
+    <script src="/js/chat.js"></script>
+    <script>
+      const toggleButton = document.querySelector(".theme-toggle");
+      const body = document.body;
+
+      // Carrega tema salvo
+      if (localStorage.getItem("theme") === "dark") {
+        body.classList.add("dark-mode");
+      }
+
+      toggleButton.addEventListener("click", () => {
+        body.classList.toggle("dark-mode");
+
+        // Salva preferência
+        if (body.classList.contains("dark-mode")) {
+          localStorage.setItem("theme", "dark");
+        } else {
+          localStorage.setItem("theme", "light");
+        }
+      });
+    </script>
+  </body>
+</html>

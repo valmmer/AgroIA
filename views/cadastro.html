@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cadastro do Produtor - AgroIA</title>
+
+    <!-- 🎨 Fontes e estilos -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Estilos locais -->
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/cadastro.css" />
+  </head>
+  <body>
+    <!-- 🌾 Cabeçalho da aplicação -->
+    <header class="header">
+      <div class="container nav">
+        <h1 class="logo">🌾 AgroIA</h1>
+        <nav>
+          <button class="theme-toggle" id="theme-toggle" title="Alternar tema">
+            🌓
+          </button>
+          <ul class="menu" id="menu">
+            <li><a href="/">Início</a></li>
+            <li><a href="/cadastro" aria-current="page">Cadastro</a></li>
+            <li><a href="/planejamento">Planejamento</a></li>
+            <li><a href="/chat">Assistente IA</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- 🧾 Formulário de cadastro do produtor -->
+    <main class="container">
+      <h2 class="form-title">Cadastro do Produtor</h2>
+      <form id="form-produtor" novalidate>
+        <label for="nome">Nome do Produtor</label>
+        <input
+          type="text"
+          id="nome"
+          name="nome"
+          placeholder="Digite seu nome completo"
+          required
+        />
+
+        <label for="localizacao">Localização (cidade/região)</label>
+        <input
+          type="text"
+          id="localizacao"
+          name="localizacao"
+          placeholder="Ex: Campo Grande, MS"
+          required
+        />
+
+        <label for="tipo-solo">Tipo de Solo</label>
+        <select id="tipo-solo" name="tipo-solo" required>
+          <option value="" disabled selected>Selecione o tipo de solo</option>
+          <option value="argiloso">Argiloso</option>
+          <option value="arenoso">Arenoso</option>
+          <option value="silte">Silte</option>
+          <option value="franco">Franco</option>
+          <option value="calcario">Calcário</option>
+          <option value="organico">Orgânico</option>
+        </select>
+
+        <label for="culturas">Culturas de Interesse</label>
+        <input
+          type="text"
+          id="culturas"
+          name="culturas"
+          placeholder="Ex: milho, feijão, soja"
+          required
+        />
+
+        <label for="periodo-plantio">Período de Plantio</label>
+        <input
+          type="text"
+          id="periodo-plantio"
+          name="periodo-plantio"
+          placeholder="Ex: Março a Junho"
+          required
+        />
+
+        <button type="submit" class="btn">Salvar</button>
+      </form>
+    </main>
+
+    <!-- 👣 Rodapé da página -->
+    <footer class="footer">
+      <p>
+        &copy; 2025 AgroIA. Desenvolvido com foco em impacto social e
+        sustentabilidade.
+      </p>
+    </footer>
+
+    <!-- 🧠 Scripts da aplicação -->
+    <script src="/js/main.js"></script>
+    <script src="/js/form-handler.js"></script>
+  </body>
+</html>
