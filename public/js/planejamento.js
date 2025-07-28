@@ -1,4 +1,4 @@
-// 🌱 Sugere culturas com base no tipo de solo
+// 🌱 Sugestão local (fallback) caso IA falhe
 function sugerirCulturas(tipoSolo) {
   const culturasPorSolo = new Map([
     ["argiloso", ["Arroz", "Feijão", "Milho"]],
@@ -11,7 +11,7 @@ function sugerirCulturas(tipoSolo) {
   return culturasPorSolo.get(tipoSolo) || ["Culturas variadas"];
 }
 
-// 🌦️ Gera uma previsão de tempo simulada
+// 🌦️ Previsão simulada
 function gerarPrevisaoSimulada() {
   const condicoesClimaticas = [
     "Ensolarado",
@@ -30,7 +30,7 @@ function gerarPrevisaoSimulada() {
   return { temperatura, condicao, chuva };
 }
 
-// 🚨 Gera alertas com base na previsão
+// 🚨 Gera alertas
 function gerarAlertas(condicao, temperatura) {
   const alertas = [];
 
@@ -47,7 +47,7 @@ function gerarAlertas(condicao, temperatura) {
   return alertas;
 }
 
-// 🔁 Atualiza os dados visuais da previsão e dos alertas
+// 🔁 Atualiza previsões
 function atualizarPrevisao() {
   const previsao = gerarPrevisaoSimulada();
 
@@ -73,7 +73,46 @@ function atualizarPrevisao() {
   });
 }
 
-// 📦 Inicializa a página com os dados salvos no localStorage
+// 🌱 Nova função: Sugestões da IA
+async function obterSugestoesIA(dadosProdutor) {
+  const listaCulturas = document.getElementById("lista-culturas");
+  listaCulturas.innerHTML = "<li>Consultando a IA...</li>";
+
+  try {
+    const resposta = await fetch("/api/sugestoes-culturas", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dadosProdutor),
+    });
+
+    const sugestoes = await resposta.json();
+
+    listaCulturas.innerHTML = "";
+
+    if (sugestoes && sugestoes.length > 0) {
+      sugestoes.forEach((cultura) => {
+        const li = document.createElement("li");
+        li.textContent = cultura;
+        listaCulturas.appendChild(li);
+      });
+    } else {
+      listaCulturas.innerHTML = "<li>Nenhuma sugestão encontrada pela IA.</li>";
+    }
+  } catch (erro) {
+    console.error("Erro com a IA. Usando sugestão local:", erro);
+    listaCulturas.innerHTML = "";
+
+    sugerirCulturas(dadosProdutor["tipo-solo"]).forEach((cultura) => {
+      const li = document.createElement("li");
+      li.textContent = cultura;
+      listaCulturas.appendChild(li);
+    });
+  }
+}
+
+// 📦 Inicializa a página
 document.addEventListener("DOMContentLoaded", () => {
   const dadosBrutos = localStorage.getItem("dadosProdutor");
   if (!dadosBrutos) {
@@ -92,7 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  // 🧾 Exibe os dados do produtor
+  // 🧾 Exibe os dados
   document.getElementById("nome-produtor").textContent = dados.nome || "—";
   document.getElementById("localizacao-produtor").textContent =
     dados.localizacao || "—";
@@ -103,19 +142,19 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("periodo-produtor").textContent =
     dados["periodo-plantio"] || "—";
 
-  // 🌿 Sugere culturas
-  const listaCulturas = document.getElementById("lista-culturas");
-  listaCulturas.innerHTML = "";
-  sugerirCulturas(dados["tipo-solo"]).forEach((cultura) => {
-    const li = document.createElement("li");
-    li.textContent = cultura;
-    listaCulturas.appendChild(li);
+  // 🌱 Sugestões da IA
+  obterSugestoesIA({
+    nome: dados.nome,
+    localizacao: dados.localizacao,
+    tipoSolo: dados["tipo-solo"],
+    culturaInteresse: dados.culturas,
+    periodoPlantio: dados["periodo-plantio"],
   });
 
-  // 🌤️ Atualiza previsão na primeira carga
+  // 🌤️ Previsão
   atualizarPrevisao();
 
-  // 🔄 Botão de atualização
+  // 🔄 Botão
   document
     .getElementById("btn-refresh")
     .addEventListener("click", atualizarPrevisao);
