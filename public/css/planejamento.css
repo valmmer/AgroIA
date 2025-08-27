@@ -1,160 +1,239 @@
-/* planejamento.css */
+/* =============================
+   Planejamento – estilos
+   (herda tokens de style.css: --surface, --border, --text, --muted, --primary, --radius, --shadow-*)
+   ============================= */
 
-/* 🌞 Tema claro */
-body {
-  background-color: #f8f8f8;
-  color: #222;
-}
-
-/* 🌓 Modo escuro */
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: #121212;
-    color: #e0e0e0;
-  }
-
-  .alert {
-    background-color: #333;
-    color: #ffd;
-    border-left: 4px solid #ff4444;
-  }
-
-  header,
-  footer {
-    background-color: #1a1a1a;
-  }
-
-  button {
-    background-color: #333;
-    color: #fff;
-  }
-}
-
-/* Container principal */
-main {
-  max-width: 900px;
-  margin: 3rem auto;
-  padding: 0 1rem;
-  font-family: "Inter", sans-serif;
-}
-
-/* Título principal */
-h2 {
+/* Layout principal */
+.page-title {
   text-align: center;
-  margin-bottom: 2rem;
-  color: var(--text);
+  font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  margin-bottom: 18px;
 }
 
-/* Cartões de conteúdo */
+/* Grid inicial: Info + Sugestões lado a lado em telas largas */
+.plan-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+@media (min-width: 900px) {
+  .plan-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Card base */
 .card {
-  background-color: var(--secondary);
-  padding: 1.5rem 2rem;
-  border-radius: 12px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-  margin-bottom: 2rem;
-  transition: background-color 0.3s ease;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius, 14px);
+  box-shadow: var(--shadow-sm, 0 4px 12px rgba(0, 0, 0, 0.06));
+  padding: 20px;
 }
-
-body.dark .card {
-  background-color: #2b2b2b;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
-}
-
-/* Títulos dentro dos cartões */
 .card h3 {
-  margin-top: 0;
-  color: var(--text);
+  margin-bottom: 10px;
 }
-
-/* Parágrafos dentro dos cartões */
 .card p {
-  font-size: 1rem;
   color: var(--text);
 }
 
-/* Lista simples para culturas */
+/* Produtor: pares label/valor com destaque discreto */
+#produtor-info p {
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  gap: 8px;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px dashed var(--border);
+}
+#produtor-info p:last-child {
+  border-bottom: 0;
+}
+#produtor-info strong {
+  color: var(--muted);
+}
+
+/* Lista de culturas em formato de chips */
 #lista-culturas {
-  list-style: disc inside;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
   padding-left: 0;
+}
+#lista-culturas li {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--primary) 28%, var(--border));
+  background: color-mix(in srgb, var(--primary) 8%, transparent);
   color: var(--text);
-  font-weight: 500;
-}
-
-/* Botão de atualizar */
-.btn-refresh {
-  display: block;
-  margin: 1rem auto 3rem auto;
-  padding: 0.8rem 2rem;
-  font-size: 1.1rem;
-  font-weight: 700;
-  background-color: var(--primary);
-  color: white;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.15s ease;
-}
-
-.btn-refresh:hover {
-  background-color: #146b14;
-  transform: scale(1.05);
-}
-
-.btn-refresh:active {
-  transform: scale(0.97);
-}
-
-/* Alertas de aviso */
-.alert {
-  background-color: #f9dcdc;
-  border-left: 6px solid #e74c3c;
-  padding: 1rem 1.5rem;
-  margin-bottom: 1rem;
-  border-radius: 6px;
-  color: #a94442;
   font-weight: 600;
 }
 
-body.dark .alert {
-  background-color: #6f2a2a;
-  border-left-color: #e74c3c;
-  color: #f7c6c5;
+/* Ações (botão atualizar) */
+.plan-actions {
+  display: flex;
+  justify-content: center;
+  margin: 8px 0 28px;
+}
+#btn-refresh.btn {
+  min-width: 220px;
 }
 
-/* Responsividade */
-@media (max-width: 600px) {
+/* Alertas */
+.alert {
+  background: color-mix(in srgb, #ef4444 12%, var(--surface));
+  border-left: 6px solid #ef4444;
+  padding: 12px 14px;
+  margin: 8px 0;
+  border-radius: 10px;
+  color: color-mix(in srgb, #ef4444 65%, var(--text));
+  font-weight: 700;
+}
+
+/* =============================
+   Weather (bloco wx)
+   ============================= */
+.wx {
+  --radius: 16px;
+}
+
+.wx-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.wx-location {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-weight: 600;
+}
+.wx-pin {
+  opacity: 0.9;
+  margin-right: 4px;
+}
+.wx-icon-xl {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
+}
+
+/* Subcards (Agora / Hoje / Astro) */
+.wx-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  margin-top: 8px;
+}
+.wx-mini {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius, 16px);
+  padding: 14px;
+  box-shadow: var(--shadow-sm, 0 4px 12px rgba(0, 0, 0, 0.06));
+}
+
+/* Agora */
+.wx-temp {
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1;
+}
+.wx-unit {
+  font-size: 18px;
+  margin-left: 4px;
+  opacity: 0.8;
+}
+.wx-cond {
+  margin-top: 6px;
+  font-weight: 700;
+}
+.wx-meta {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: var(--muted);
+}
+.wx-meta span {
+  background: color-mix(in srgb, var(--primary) 9%, transparent);
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--primary) 28%, var(--border));
+}
+
+/* Alertas meteo */
+.wx-alerts {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: var(--radius, 16px);
+  background: color-mix(in srgb, #ef4444 10%, var(--surface));
+  border: 1px solid color-mix(in srgb, #ef4444 25%, var(--border));
+}
+.wx-alerts .alert {
+  margin: 6px 0 0;
+}
+
+/* Próximos dias (cards) */
+.wx-subtitle {
+  margin: 14px 0 10px;
+}
+.wx-days {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+}
+.wx-day {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto auto;
+  align-items: center;
+  gap: 6px;
+  padding: 10px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+.wx-day .date {
+  grid-column: 1 / -1;
+  font-weight: 800;
+  opacity: 0.9;
+}
+.wx-day .icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+.wx-day .temps {
+  font-weight: 800;
+}
+.wx-day .rain {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.wx-day .cond {
+  grid-column: 1 / -1;
+  color: var(--muted);
+}
+
+/* =============================
+   Responsividade fina
+   ============================= */
+@media (max-width: 640px) {
   .card {
-    padding: 1rem 1.2rem;
+    padding: 16px;
   }
-
-  .btn-refresh {
-    width: 100%;
-    padding: 1rem;
+  .wx-temp {
+    font-size: 34px;
   }
-}
-body.dark {
-  background-color: #121212;
-  color: #e0e0e0;
-}
-
-body.dark header,
-body.dark footer {
-  background-color: #1a1a1a;
-}
-
-body.dark .alert {
-  background-color: #333;
-  color: #ffd;
-  border-left: 4px solid #ff4444;
-}
-
-body.dark button {
-  background-color: #333;
-  color: #fff;
-}
-@media (prefers-color-scheme: dark) {
-  body:not(.dark-mode-disabled) {
-    background-color: #121212;
-    color: #e0e0e0;
+  #produtor-info p {
+    grid-template-columns: 1fr;
   }
 }

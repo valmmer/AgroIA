@@ -1,83 +1,99 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
     <title>🌾 AgroIA - Assistente Virtual</title>
 
-    <!-- Fontes e estilos -->
+    <!-- Fontes & estilos globais -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
-
-    <!-- Estilos do projeto -->
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/chat.css" />
+
+    <!-- jsPDF para exportar PDF -->
+<script src="/vendor/jspdf.umd.min.js"></script>
+
+
+
   </head>
   <body>
-    <!-- Cabeçalho com menu de navegação -->
-    <header class="header">
-      <div class="container nav">
-        <div class="logo">🌾 AgroIA</div>
-        <ul class="menu">
-          <li><a href="/">Início</a></li>
-          <li><a href="/cadastro">Cadastro</a></li>
-          <li><a href="/planejamento">Planejamento</a></li>
-          <li><a href="/chat" aria-current="page">Assistente IA</a></li>
-        </ul>
-        <button class="theme-toggle" title="Alternar tema">🌓</button>
+    <!-- Cabeçalho -->
+    <header class="header shadow-sm">
+      <div class="container header-bar">
+        <h1 class="logo">🌾 AgroIA</h1>
+        <nav class="nav" aria-label="Navegação principal">
+          <button class="theme-toggle" id="theme-toggle" title="Alternar tema">
+            🌓
+          </button>
+          <ul class="menu" id="menu">
+            <li><a href="/">Início</a></li>
+            <li><a href="/cadastro">Cadastro</a></li>
+            <li><a href="/planejamento">Planejamento</a></li>
+            <li><a href="/chat" aria-current="page">Assistente IA</a></li>
+          </ul>
+        </nav>
       </div>
     </header>
 
-    <!-- Corpo principal do chat -->
-    <main class="container">
-      <h2>🌿 Assistente Virtual AgroIA</h2>
-      <div id="chat-container">
-        <div id="chat-messages"></div>
-        <form id="chat-form">
-          <input
-            type="text"
-            id="user-input"
-            placeholder="Digite sua mensagem..."
-            required
-          />
-          <button type="submit" class="btn">Enviar</button>
-        </form>
+    <!-- Corpo principal -->
+    <main class="main">
+      <div class="container">
+        <h2 class="page-title">🌿 Assistente Virtual AgroIA</h2>
+
+        <section id="chat-container" class="chat-wrap card">
+          <!-- Área de mensagens -->
+          <div
+            id="chat-messages"
+            aria-live="polite"
+            aria-label="Mensagens do chat"
+          ></div>
+
+          <!-- Linha de entrada -->
+          <form id="chat-form" class="input-row" autocomplete="off">
+            <label class="sr-only" for="user-input">Mensagem</label>
+            <input
+              type="text"
+              id="user-input"
+              name="message"
+              placeholder="Digite sua mensagem..."
+              required
+              autocomplete="off"
+            />
+            <button type="submit" class="btn btn-primary">Enviar</button>
+          </form>
+
+          <!-- Barra de ações -->
+          <div class="chat-actions">
+            <button id="copy-chat" class="btn btn-secondary">📋 Copiar</button>
+            <button id="export-pdf" class="btn btn-secondary">📄 PDF</button>
+          </div>
+
+          <small id="chat-hint" class="muted-text">
+            💡 Dica: Pergunte sobre agricultura, planejamento ou sustentabilidade.
+          </small>
+        </section>
       </div>
     </main>
 
     <!-- Rodapé -->
     <footer class="footer">
-      <p>
-        &copy; 2025 AgroIA. Desenvolvido com foco em impacto social e
-        sustentabilidade.
-      </p>
+      <div class="container">
+        <p>
+          &copy; 2025 AgroIA · Desenvolvido com foco em impacto social e sustentabilidade 🌍
+        </p>
+      </div>
     </footer>
 
-    <!-- Script da lógica do chat -->
+    <!-- Scripts -->
+    <script src="/js/main.js"></script>
     <script src="/js/chat.js"></script>
-    <script>
-      const toggleButton = document.querySelector(".theme-toggle");
-      const body = document.body;
-
-      // Carrega tema salvo
-      if (localStorage.getItem("theme") === "dark") {
-        body.classList.add("dark-mode");
-      }
-
-      toggleButton.addEventListener("click", () => {
-        body.classList.toggle("dark-mode");
-
-        // Salva preferência
-        if (body.classList.contains("dark-mode")) {
-          localStorage.setItem("theme", "dark");
-        } else {
-          localStorage.setItem("theme", "light");
-        }
-      });
-    </script>
   </body>
 </html>

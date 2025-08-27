@@ -2,24 +2,32 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
     <title>AgroIA - Apoio ao Pequeno Produtor</title>
-    <link rel="stylesheet" href="./css/style.css" />
+
+    <!-- Fonte & CSS -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body>
+    <!-- Header fixo com glass effect -->
     <header class="header">
-      <div class="container">
+      <div class="container header-bar">
         <h1 class="logo">🌾 AgroIA</h1>
-        <nav class="nav">
-          <button class="theme-toggle" id="theme-toggle">🌓</button>
+        <nav class="nav" aria-label="Navegação principal">
+          <button class="theme-toggle" id="theme-toggle" title="Alternar tema">
+            🌓
+          </button>
           <ul class="menu" id="menu">
-            <li><a href="/">Início</a></li>
+            <li><a href="/" aria-current="page">Início</a></li>
             <li><a href="/cadastro">Cadastro</a></li>
             <li><a href="/planejamento">Planejamento</a></li>
             <li><a href="/chat">Assistente IA</a></li>
@@ -29,33 +37,50 @@
     </header>
 
     <main class="main">
+      <!-- HERO -->
       <section class="hero">
-        <h2>Bem-vindo ao AgroIA</h2>
-        <p>
-          Uma plataforma inteligente para apoiar o pequeno produtor rural com
-          dados do clima, sugestões de cultivo e inteligência artificial.
-        </p>
-        <a href="cadastro.html" class="btn">Começar Agora</a>
+        <div class="container hero-inner">
+          <h2 class="hero-title">Bem-vindo ao AgroIA</h2>
+          <p class="hero-sub">
+            Plataforma inteligente para apoiar o pequeno produtor com dados
+            reais de clima, sugestões de cultivo e IA — para decidir
+            <em>o quê</em> plantar, <em>quando</em> e <em>como</em>.
+          </p>
+          <div class="hero-ctas">
+            <a href="/cadastro" class="btn btn-primary">Começar agora</a>
+            <a href="/planejamento" class="btn btn-outline">Ver planejamento</a>
+          </div>
+        </div>
+        <!-- decoração leve -->
+        <div class="hero-decor" aria-hidden="true"></div>
       </section>
 
+      <!-- SOBRE -->
       <section class="sobre">
-        <h3>Por que AgroIA?</h3>
-        <p>
-          Pequenos produtores enfrentam desafios climáticos e falta de acesso a
-          tecnologia. O AgroIA conecta dados reais com boas práticas agrícolas e
-          oferece suporte acessível usando IA, ajudando o produtor a decidir o
-          que plantar, quando e como.
-        </p>
+        <div class="container">
+          <div class="card about-card">
+            <h3>Por que AgroIA?</h3>
+            <p>
+              Pequenos produtores enfrentam desafios climáticos e pouco acesso à
+              tecnologia. O AgroIA conecta <strong>dados do tempo</strong> a
+              <strong>boas práticas agrícolas</strong> e usa <strong>IA</strong>
+              para apoiar decisões de plantio de forma simples, acessível e
+              eficiente.
+            </p>
+          </div>
+        </div>
       </section>
     </main>
 
     <footer class="footer">
-      <p>
-        &copy; 2025 AgroIA. Desenvolvido com foco em impacto social e
-        sustentabilidade.
-      </p>
+      <div class="container">
+        <p>
+          &copy; 2025 AgroIA. Desenvolvido com foco em impacto social e
+          sustentabilidade.
+        </p>
+      </div>
     </footer>
 
-    <script src="./js/main.js"></script>
+    <script src="/js/main.js"></script>
   </body>
 </html>

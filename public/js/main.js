@@ -29,3 +29,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+// Validação do Formulário de Produtor

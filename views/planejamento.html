@@ -2,28 +2,29 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
     <title>Planejamento de Plantio - AgroIA</title>
 
-    <!-- 🎨 Fontes e estilos externos -->
+    <!-- Fontes & estilos -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
-
-    <!-- 🎨 Estilos internos do projeto -->
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/cadastro.css" />
     <link rel="stylesheet" href="/css/planejamento.css" />
   </head>
   <body>
-    <!-- 🌾 Cabeçalho de navegação -->
+    <!-- Header fixo (mesmo visual das outras páginas) -->
     <header class="header">
-      <div class="container nav">
+      <div class="container header-bar">
         <h1 class="logo">🌾 AgroIA</h1>
-        <nav>
+        <nav class="nav" aria-label="Navegação principal">
           <button class="theme-toggle" id="theme-toggle" title="Alternar tema">
             🌓
           </button>
@@ -39,58 +40,117 @@
       </div>
     </header>
 
-    <!-- 🌿 Conteúdo principal -->
-    <main class="container">
-      <h2>Planejamento de Plantio</h2>
+    <!-- Conteúdo -->
+    <main class="main">
+      <div class="container">
+        <h2 class="page-title">Planejamento de Plantio</h2>
 
-      <section id="produtor-info" class="card">
-        <h3>Informações do Produtor</h3>
-        <p><strong>Nome:</strong> <span id="nome-produtor">—</span></p>
-        <p>
-          <strong>Localização:</strong> <span id="localizacao-produtor">—</span>
-        </p>
-        <p><strong>Tipo de Solo:</strong> <span id="solo-produtor">—</span></p>
-        <p>
-          <strong>Culturas de Interesse:</strong>
-          <span id="culturas-produtor">—</span>
-        </p>
-        <p>
-          <strong>Período de Plantio:</strong>
-          <span id="periodo-produtor">—</span>
-        </p>
-      </section>
+        <!-- Grid: Info + Sugestões -->
+        <div class="plan-grid">
+          <section id="produtor-info" class="card">
+            <h3>Informações do Produtor</h3>
+            <p><strong>Nome:</strong> <span id="nome-produtor">—</span></p>
+            <p>
+              <strong>Localização:</strong>
+              <span id="localizacao-produtor">—</span>
+            </p>
+            <p>
+              <strong>Tipo de Solo:</strong> <span id="solo-produtor">—</span>
+            </p>
+            <p>
+              <strong>Culturas de Interesse:</strong>
+              <span id="culturas-produtor">—</span>
+            </p>
+            <p>
+              <strong>Período de Plantio:</strong>
+              <span id="periodo-produtor">—</span>
+            </p>
+          </section>
 
-      <section id="sugestoes-culturas" class="card">
-        <h3>Sugestões de Culturas para seu Solo</h3>
-        <ul id="lista-culturas">
-          <li>Carregando...</li>
-        </ul>
-      </section>
+          <section id="sugestoes-culturas" class="card">
+            <h3>Sugestões de Culturas para seu Solo</h3>
+            <ul id="lista-culturas">
+              <li>Carregando...</li>
+            </ul>
+          </section>
+        </div>
 
-      <section id="previsao-tempo" class="card">
-        <h3>Previsão do Tempo (Simulada)</h3>
-        <p><strong>Temperatura:</strong> <span id="temp">—</span> °C</p>
-        <p><strong>Condição:</strong> <span id="condicao">—</span></p>
-        <p><strong>Chance de Chuva:</strong> <span id="chuva">—</span>%</p>
-      </section>
+        <!-- Previsão do Tempo -->
+        <section id="previsao-tempo" class="card wx">
+          <div class="wx-header">
+            <div>
+              <h3>Previsão do Tempo (WeatherAPI)</h3>
+              <p class="wx-location">
+                <span class="wx-pin">📍</span>
+                <span id="wx-cidade">—</span>
+              </p>
+            </div>
+            <img
+              id="wx-now-icon"
+              alt=""
+              class="wx-icon-xl"
+              style="display: none"
+            />
+          </div>
 
-      <section id="alertas" class="card" style="display: none">
-        <h3>Alertas</h3>
-        <div id="alertas-lista"></div>
-      </section>
+          <div class="wx-grid">
+            <div class="wx-now wx-mini">
+              <div class="wx-temp">
+                <span id="temp">—</span><span class="wx-unit">°C</span>
+              </div>
+              <div class="wx-cond"><span id="condicao">—</span></div>
+              <div class="wx-meta">
+                <span>Umidade <strong id="umidade">—</strong>%</span>
+                <span>Vento <strong id="vento">—</strong></span>
+                <span>UV <strong id="uv">—</strong></span>
+              </div>
+            </div>
 
-      <button class="btn-refresh" id="btn-refresh">Atualizar Previsão</button>
+            <div class="wx-today wx-mini">
+              <h5>Hoje</h5>
+              <p>
+                <strong>Máx:</strong> <span id="dia-max">—</span> °C &nbsp;
+                <strong>Mín:</strong> <span id="noite-min">—</span> °C
+              </p>
+              <p><strong>Chuva:</strong> <span id="dia-chuva">—</span>%</p>
+            </div>
+
+            <div class="wx-astro wx-mini">
+              <h5>Astro</h5>
+              <p><strong>Amanhecer:</strong> <span id="nascer-sol">—</span></p>
+              <p><strong>Pôr do sol:</strong> <span id="por-sol">—</span></p>
+              <p><strong>Lua:</strong> <span id="fase-lua">—</span></p>
+            </div>
+          </div>
+
+          <div id="alertas" class="wx-alerts" style="display: none">
+            <h4>Alertas</h4>
+            <div id="alertas-lista"></div>
+          </div>
+
+          <h4 class="wx-subtitle">Próximos dias</h4>
+          <div id="dias-lista" class="wx-days"></div>
+        </section>
+
+        <div class="plan-actions">
+          <button class="btn btn-outline" id="btn-refresh">
+            Atualizar previsão
+          </button>
+        </div>
+      </div>
     </main>
 
-    <!-- 👣 Rodapé da página -->
+    <!-- Rodapé -->
     <footer class="footer">
-      <p>
-        &copy; 2025 AgroIA. Desenvolvido com foco em impacto social e
-        sustentabilidade.
-      </p>
+      <div class="container">
+        <p>
+          &copy; 2025 AgroIA. Desenvolvido com foco em impacto social e
+          sustentabilidade.
+        </p>
+      </div>
     </footer>
 
-    <!-- 🧠 Scripts do frontend -->
+    <!-- Scripts -->
     <script src="/js/main.js"></script>
     <script src="/js/planejamento.js"></script>
   </body>

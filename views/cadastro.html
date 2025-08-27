@@ -2,27 +2,28 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
     <title>Cadastro do Produtor - AgroIA</title>
 
-    <!-- 🎨 Fontes e estilos -->
+    <!-- Fontes & estilos globais -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
-
-    <!-- Estilos locais -->
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/cadastro.css" />
   </head>
   <body>
-    <!-- 🌾 Cabeçalho da aplicação -->
+    <!-- Header fixo (herda estilos do style.css) -->
     <header class="header">
-      <div class="container nav">
+      <div class="container header-bar">
         <h1 class="logo">🌾 AgroIA</h1>
-        <nav>
+        <nav class="nav" aria-label="Navegação principal">
           <button class="theme-toggle" id="theme-toggle" title="Alternar tema">
             🌓
           </button>
@@ -36,81 +37,141 @@
       </div>
     </header>
 
-    <!-- 🧾 Formulário de cadastro do produtor -->
-    <main class="container">
-      <h2 class="form-title">Cadastro do Produtor</h2>
-      <form id="form-produtor" novalidate>
-        <label for="nome">Nome do Produtor</label>
-        <input
-          type="text"
-          id="nome"
-          name="nome"
-          placeholder="Digite seu nome completo"
-          required
-        />
+    <!-- Conteúdo principal -->
+    <main class="main cadastro">
+      <div class="container">
+        <div class="form-wrap">
+          <h2 class="form-title">Cadastro do Produtor</h2>
+          <p class="form-sub">
+            Preencha seus dados para personalizar o planejamento de plantio.
+          </p>
 
-        <label for="localizacao">Localização (cidade/região)</label>
-        <input
-          type="text"
-          id="localizacao"
-          name="localizacao"
-          placeholder="Ex: Campo Grande, MS"
-          required
-        />
+          <!-- Formulário (ids/names compatíveis com form-handler.js) -->
+          <form id="form-produtor" novalidate>
+            <div class="form-grid">
+              <!-- Nome -->
+              <div class="field">
+                <label for="nome">Nome do Produtor</label>
+                <input
+                  type="text"
+                  id="nome"
+                  name="nome"
+                  placeholder="Digite seu nome completo"
+                  autocomplete="name"
+                  required
+                />
+              </div>
 
-        <label for="tipo-solo">Tipo de Solo</label>
-        <select id="tipo-solo" name="tipo-solo" required>
-          <option value="" disabled selected>Selecione o tipo de solo</option>
+              <!-- Cidade + UF -->
+              <div class="form-row form-row--city-uf">
+                <div class="field">
+                  <label for="city">Cidade</label>
+                  <input
+                    type="text"
+                    id="city"
+                    name="city"
+                    placeholder="Ex.: Itajubá"
+                    pattern="[A-Za-zÀ-ÿ\s]{2,}"
+                    title="Digite o nome da cidade corretamente"
+                    required
+                    aria-describedby="hint-city"
+                    autocomplete="address-level2"
+                  />
+                  <small id="hint-city" class="hint"
+                    >Use apenas letras (com acentos) e espaços.</small
+                  >
+                </div>
 
-          <option value="latossolo">Latossolo</option>
-          <option value="argissolo">Argissolo</option>
-          <option value="neossolo">Neossolo</option>
-          <option value="gleissolo">Gleissolo (Hidromórfico)</option>
-          <option value="cambissolo">Cambissolo</option>
-          <option value="nitossolo">Nitossolo</option>
-          <option value="planossolo">Planossolo</option>
-          <option value="espodossolo">Espodossolo</option>
-          <option value="organossolo">Organossolo</option>
+                <div class="field">
+                  <label for="state">UF</label>
+                  <input
+                    type="text"
+                    id="state"
+                    name="state"
+                    placeholder="Ex.: MG"
+                    pattern="^[A-Z]{2}$"
+                    title="Digite a sigla do estado com 2 letras maiúsculas"
+                    required
+                    aria-describedby="hint-uf"
+                    autocomplete="address-level1"
+                  />
+                  <small id="hint-uf" class="hint"
+                    >Duas letras em maiúsculas (ex.: MG, SP, PR).</small
+                  >
+                </div>
+              </div>
 
-          <!-- Outros mais conhecidos ou didáticos para o usuário -->
-          <option value="argiloso">Argiloso</option>
-          <option value="arenoso">Arenoso</option>
-          <option value="silte">Silte (Siltoso)</option>
-          <option value="franco">Franco</option>
-          <option value="calcario">Calcário</option>
-        </select>
+              <!-- Tipo de solo -->
+              <div class="field">
+                <label for="tipo-solo">Tipo de Solo</label>
+                <select id="tipo-solo" name="tipo-solo" required>
+                  <option value="" disabled selected>
+                    Selecione o tipo de solo
+                  </option>
+                  <option value="latossolo">Latossolo</option>
+                  <option value="argissolo">Argissolo</option>
+                  <option value="neossolo">Neossolo</option>
+                  <option value="gleissolo">Gleissolo (Hidromórfico)</option>
+                  <option value="cambissolo">Cambissolo</option>
+                  <option value="nitossolo">Nitossolo</option>
+                  <option value="planossolo">Planossolo</option>
+                  <option value="espodossolo">Espodossolo</option>
+                  <option value="organossolo">Organossolo</option>
+                  <!-- Didáticos -->
+                  <option value="argiloso">Argiloso</option>
+                  <option value="arenoso">Arenoso</option>
+                  <option value="silte">Silte (Siltoso)</option>
+                  <option value="franco">Franco</option>
+                  <option value="calcario">Calcário</option>
+                </select>
+              </div>
 
-        <label for="culturas">Culturas de Interesse</label>
-        <input
-          type="text"
-          id="culturas"
-          name="culturas"
-          placeholder="Ex: milho, feijão, soja"
-          required
-        />
+              <!-- Culturas -->
+              <div class="field">
+                <label for="culturas">Culturas de Interesse</label>
+                <input
+                  type="text"
+                  id="culturas"
+                  name="culturas"
+                  placeholder="Ex.: milho, feijão, soja"
+                  required
+                />
+              </div>
 
-        <label for="periodo-plantio">Período de Plantio</label>
-        <input
-          type="text"
-          id="periodo-plantio"
-          name="periodo-plantio"
-          placeholder="Ex: Março a Junho"
-          required
-        />
+              <!-- Período -->
+              <div class="field">
+                <label for="periodo-plantio">Período de Plantio</label>
+                <input
+                  type="text"
+                  id="periodo-plantio"
+                  name="periodo-plantio"
+                  placeholder="Ex.: Março a Junho"
+                  required
+                />
+              </div>
 
-        <button type="submit" class="btn">Salvar</button>
-      </form>
+              <!-- Ações -->
+              <div class="form-actions">
+                </button>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </main>
 
-    <!-- 👣 Rodapé da página -->
+    <!-- Rodapé -->
     <footer class="footer">
-      <p>
-        &copy; 2025 AgroIA. Desenvolvido com foco em impacto social e
-        sustentabilidade.
-      </p>
+      <div class="container">
+        <p>
+          &copy; 2025 AgroIA. Desenvolvido com foco em impacto social e
+          sustentabilidade.
+        </p>
+      </div>
     </footer>
 
-    <!-- 🧠 Scripts da aplicação -->
+    <!-- Scripts -->
     <script src="/js/main.js"></script>
     <script src="/js/form-handler.js"></script>
   </body>
