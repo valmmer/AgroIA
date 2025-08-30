@@ -6,7 +6,10 @@ const path = require("path");
 const fetch = require("node-fetch");
 const helmet = require("helmet");
 const cors = require("cors");
-require("dotenv").config(); // Variáveis de ambiente (.env)
+//require("dotenv").config(); // Variáveis de ambiente (.env)
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config(); // Carrega .env apenas em ambiente local
+}
 
 // ================================
 // 🚀 Inicializa o servidor Express
@@ -456,7 +459,26 @@ app.get("/api/weather", async (req, res) => {
 // ================================
 // 🚀 Inicia o servidor
 // ================================
+// ================================
+// 🩺 Healthcheck
+// ================================
+app.get("/healthz", (req, res) => res.status(200).send("ok"));
+
+// ================================
+// 🚀 Inicia o servidor (bind em 0.0.0.0)
+// ================================
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () =>
-  console.log(`✅ AgroIA rodando em http://localhost:${PORT}`)
-);
+const HOST = "0.0.0.0";
+
+const server = app.listen(PORT, HOST, () => {
+  console.log(`✅ AgroIA rodando em http://${HOST}:${PORT} (NODE_ENV=${process.env.NODE_ENV || "dev"})`);
+});
+
+// Encerramento gracioso — quando o Railway fizer rolling restart / deploy
+process.on("SIGTERM", () => {
+  console.log("🔻 Recebi SIGTERM, fechando servidor…");
+  server.close(() => {
+    console.log("🔻 Servidor fechado com segurança.");
+    process.exit(0);
+  });
+});
